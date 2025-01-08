@@ -3,28 +3,30 @@ pipeline {
 
     environment {
         // Set environment variables here if needed
-        MY_ENV_VAR = 'SomeValue'
+        //MY_ENV_VAR = 'SomeValue'
     }
 
     tools {
         // Define tools that should be available in the pipeline (e.g., JDK, Maven, NodeJS)
-        jdk 'jdk11'  // Example for JDK 11, ensure it is defined in Jenkins global tool configuration
-        maven 'Maven-3.8.1'  // Example for Maven, define it in Jenkins global tool configuration
+     //   jdk 'jdk11'  // Example for JDK 11, ensure it is defined in Jenkins global tool configuration
+      //  maven 'Maven-3.8.1'  // Example for Maven, define it in Jenkins global tool configuration
     }
 
     stages {
         stage('Checkout') {
             steps {
                 // Checkout the repository from SCM
-                git 'https://github.com/your-repository/project.git'
+               // git 'https://github.com/your-repository/project.git'
+                 echo "checkout"
             }
         }
 
         stage('Build') {
             steps {
                 // Run build steps, e.g., Maven, Gradle, npm, etc.
-                echo "Building the project..."
-                sh 'mvn clean install'  // Example for Maven build
+               // echo "Building the project..."
+               // sh 'mvn clean install'  // Example for Maven build
+                  echo "build"
             }
         }
 
@@ -32,12 +34,12 @@ pipeline {
             steps {
                 // Run tests, for example with Maven, Gradle, etc.
                 echo "Running tests..."
-                sh 'mvn test'  // Example for Maven tests
+                //sh 'mvn test'  // Example for Maven tests
             }
             post {
                 always {
                     // Archive test results regardless of success or failure
-                    junit '**/target/test-*.xml'  // Example for JUnit test results
+                   // junit '**/target/test-*.xml'  // Example for JUnit test results
                 }
             }
         }
@@ -46,7 +48,7 @@ pipeline {
             steps {
                 // Perform static code analysis
                 echo "Running static code analysis..."
-                sh 'mvn pmd:pmd'  // Example for PMD static analysis (if using Maven)
+               // sh 'mvn pmd:pmd'  // Example for PMD static analysis (if using Maven)
             }
         }
 
@@ -54,7 +56,7 @@ pipeline {
             steps {
                 // Deploy the application (e.g., to a staging server, AWS, Kubernetes, etc.)
                 echo "Deploying application..."
-                sh './deploy.sh'  // Example for a deploy script
+               // sh './deploy.sh'  // Example for a deploy script
             }
         }
 
