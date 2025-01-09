@@ -1,25 +1,8 @@
 pipeline {
     agent any  // This specifies the pipeline to run on any available agent (node)
 
-    environment {
-        // Set environment variables here if needed
-        //MY_ENV_VAR = 'SomeValue'
-    }
-
-    tools {
-        // Define tools that should be available in the pipeline (e.g., JDK, Maven, NodeJS)
-     //   jdk 'jdk11'  // Example for JDK 11, ensure it is defined in Jenkins global tool configuration
-      //  maven 'Maven-3.8.1'  // Example for Maven, define it in Jenkins global tool configuration
-    }
-
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the repository from SCM
-               // git 'https://github.com/your-repository/project.git'
-                 echo "checkout"
-            }
-        }
+       
 
         stage('Build') {
             steps {
@@ -36,12 +19,7 @@ pipeline {
                 echo "Running tests..."
                 //sh 'mvn test'  // Example for Maven tests
             }
-            post {
-                always {
-                    // Archive test results regardless of success or failure
-                   // junit '**/target/test-*.xml'  // Example for JUnit test results
-                }
-            }
+           
         }
 
         stage('Static Analysis') {
@@ -63,36 +41,18 @@ pipeline {
         stage('Approval') {
             steps {
                 // Manual approval for production deployment
-                input message: 'Approve deployment to production?', ok: 'Deploy'
+               // input message: 'Approve deployment to production?', ok: 'Deploy'
             }
         }
 
         stage('Production Deployment') {
-            when {
-                branch 'main'  // Only run this stage when deploying from the 'main' branch
-            }
+          
             steps {
                 // Production deployment steps (e.g., to live environment)
                 echo "Deploying to production..."
-                sh './deploy-prod.sh'  // Example for production deploy script
+              //  sh './deploy-prod.sh'  // Example for production deploy script
             }
         }
     }
 
-    post {
-        always {
-            // Actions to take always after the pipeline completes (e.g., cleanup)
-            echo 'Cleaning up...'
-        }
-
-        success {
-            // Actions to take when the pipeline is successful
-            echo 'Pipeline completed successfully!'
-        }
-
-        failure {
-            // Actions to take when the pipeline fails
-            echo 'Pipeline failed. Please investigate.'
-        }
-    }
-}
+  }
