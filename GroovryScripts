@@ -22,13 +22,7 @@ pipeline {
            
         }
 
-        stage('Static Analysis') {
-            steps {
-                // Perform static code analysis
-                echo "Running static code analysis..."
-               // sh 'mvn pmd:pmd'  // Example for PMD static analysis (if using Maven)
-            }
-        }
+       
 
         stage('Deploy') {
             steps {
@@ -38,21 +32,9 @@ pipeline {
             }
         }
 
-        stage('Approval') {
-            steps {
-                // Manual approval for production deployment
-               // input message: 'Approve deployment to production?', ok: 'Deploy'
-            }
-        }
+      
 
-        stage('Production Deployment') {
-          
-            steps {
-                // Production deployment steps (e.g., to live environment)
-                echo "Deploying to production..."
-              //  sh './deploy-prod.sh'  // Example for production deploy script
-            }
-        }
+       
     }
 
   }
